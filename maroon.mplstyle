@@ -1,0 +1,3 @@
+# Consecutive Colors
+axes.prop_cycle: cycler('color', ['maroon', 'black', 'deepskyblue', 'darkgrey', '000080', '008000', '008080', '808000', '804000'])
+axes.grid: true
