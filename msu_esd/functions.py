@@ -46,5 +46,12 @@ def f(Q, D, epsilon, rho, mu):
     def laminar(D_, rho_, mu_):
         return lambda Q__: 64/Re(Q__, D_, rho_, mu_)
 
+    # For some reason, numpy messes up (sometimes) with integers/floats
+    if not isinstance(Q, np.ndarray):
+        if Re(Q, D, epsilon, mu) > 2300:
+            return turbulent(D, epsilon, rho, mu)(Q)
+        else:
+            return laminar(D, rho, mu)(Q)
+
     return np.piecewise(Q, [Re(Q, D, rho, mu) > 2300, Re(Q, D, rho, mu) <= 2300],
                         [turbulent(D, epsilon, rho, mu), laminar(D, rho, mu)])
