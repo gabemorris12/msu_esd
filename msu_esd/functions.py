@@ -48,7 +48,7 @@ def f(Q, D, epsilon, rho, mu):
 
     # For some reason, numpy messes up (sometimes) with integers/floats
     if not isinstance(Q, np.ndarray):
-        if Re(Q, D, epsilon, mu) > 2300:
+        if Re(Q, D, rho, mu) > 2300:
             return turbulent(D, epsilon, rho, mu)(Q)
         else:
             return laminar(D, rho, mu)(Q)
