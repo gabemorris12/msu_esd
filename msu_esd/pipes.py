@@ -13,7 +13,7 @@ class Pipe:
         self.g = g
         self.eta = eta
         self.pump, self.turbine = pump, turbine
-        self.W_s_turbine, self.W_s_pump, self.Q = None, None, None
+        self.W_s_turbine, self.W_s_pump, self.Q = 0, 0, None
 
         # todo: This needs to be tested by incorporating problems that have both pumps and turbines as well as problems
         # todo: where the pump and turbine heads are known
