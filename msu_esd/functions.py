@@ -23,7 +23,7 @@ def Re(Q, D, rho, mu):
     :param mu: The dynamic viscosity of the fluid
     :return: Re
     """
-    return (4*rho*Q)/(np.pi*D*mu)
+    return (4*rho*np.abs(Q))/(np.pi*D*mu)
 
 
 def f(Q, D, epsilon, rho, mu):

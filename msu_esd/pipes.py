@@ -155,7 +155,7 @@ class Pipe:
         :param Q: The flow rate
         :return: h_f
         """
-        return 8*Q**2*(self.C*self.f_T() + self.K + self.L/self.D*self.f(Q))/(np.pi**2*self.D**4)
+        return 8*Q*abs(Q)*(self.C*self.f_T() + self.K + self.L/self.D*self.f(Q))/(np.pi**2*self.D**4)
 
     def __call__(self, *args):
         """
