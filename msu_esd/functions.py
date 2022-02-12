@@ -49,3 +49,36 @@ def f(Q, D, epsilon, rho, mu):
 
     return np.piecewise(Q, [Re(Q, D, rho, mu) > 2300, Re(Q, D, rho, mu) <= 2300],
                         [turbulent(D, epsilon, rho, mu), laminar(D, rho, mu)])
+
+
+def hardy_cross(pipes, Q, N, h=None, dh=None, tol=0.0001):
+    """
+    Returns the Hardy Cross solution for a pipe arrangement.
+
+    :param pipes: A list of pipe objects
+    :param Q: The corresponding guess flow rates to the pipe objects list. Must satisfy equilibrium at the nodes.
+    :param N: The connection matrix. Should be a "number of pipes" by "number of loops" shape.
+    :param h: A list of callable functions. Only necessary if adding a device that adds head loss or gain.
+    :param dh: A list of callable functions of the derivative of h.
+    :param tol: The error tolerance
+    :return: Q, a list of flow rates
+    """
+    assert isinstance(N, np.ndarray), '"N" must be a numpy array.'
+
+    if h is None and dh is None:
+        h = [lambda Q_: 0 for _ in range(len(Q))]
+        dh = [lambda Q_: 0 for _ in range(len(Q))]
+
+    P, L = N.shape
+    del_Q = np.full(L, 100)
+    r = np.sqrt(np.sum(del_Q**2))
+
+    get_h = lambda: np.array([pipe.h(Q[i]) + h[i](Q[i]) for i, pipe in enumerate(pipes)])
+    get_dh = lambda: np.array([pipe.dh(Q[i]) + dh[i](Q[i]) for i, pipe in enumerate(pipes)])
+
+    while r > tol:
+        del_Q = -1*np.matmul(get_h(), N)/np.matmul(get_dh(), N**2)
+        r = np.sqrt(np.sum(del_Q**2))
+        Q = (Q.reshape((P, 1)) + np.matmul(N, del_Q.reshape((L, 1)))).reshape(P)
+
+    return Q
