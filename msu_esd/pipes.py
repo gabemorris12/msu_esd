@@ -150,12 +150,30 @@ class Pipe:
 
     def h_f(self, Q):
         """
-        Calculates the losses
+        Calculates the losses in ft^2 per s^2 (does not divide by g).
 
         :param Q: The flow rate
         :return: h_f
         """
         return 8*Q*abs(Q)*(self.C*self.f_T() + self.K + self.L/self.D*self.f(Q))/(np.pi**2*self.D**4)
+
+    def h(self, Q):
+        """
+        Returns the head loss in ft (does divide by g).
+
+        :param Q: The flow rate
+        :return: h
+        """
+        return self.h_f(Q)/self.g
+
+    def dh(self, Q):
+        """
+        Returns the derivative of the head loss in s per ft^2
+
+        :param Q: The flow rate
+        :return: dh/dQ
+        """
+        return 16*abs(Q)*(self.f(Q)*self.L/self.D + self.K + self.C*self.f_T())/(np.pi**2*self.g*self.D**4)
 
     def __call__(self, *args):
         """
