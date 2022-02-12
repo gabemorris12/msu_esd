@@ -190,5 +190,5 @@ class Pipe:
 
     def __repr__(self):
         return f'Pipe({self.D}, {self.L}, {self.epsilon}, {self.rho}, {self.mu}, K={self.K}, C={self.C}, ' \
-               f'P_in={self.P_in}, P_out={self.P_out}, V_in={self.V_in}, V_out={self.V_out}, z_in={self.z_in},' \
+               f'P_in={self.P_in}, P_out={self.P_out}, V_in={self.V_in}, V_out={self.V_out}, z_in={self.z_in}, ' \
                f'z_out={self.z_out}, g={self.g}, eta={self.eta}, pump={self.pump}, turbine={self.turbine})'
