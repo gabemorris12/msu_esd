@@ -39,19 +39,13 @@ def f(Q, D, epsilon, rho, mu):
     :param mu: The dynamic viscosity of the fluid
     :return: f
     """
+    Q = np.float64(Q)  # This calculation raises some issues if Q is a large python integer. This fixes it.
 
     def turbulent(D_, epsilon_, rho_, mu_):
         return lambda Q__: 0.3086/(np.log10(6.9/Re(Q__, D_, rho_, mu_) + (epsilon_/(3.7*D_))**1.11))**2
 
     def laminar(D_, rho_, mu_):
         return lambda Q__: 64/Re(Q__, D_, rho_, mu_)
-
-    # For some reason, numpy messes up (sometimes) with integers/floats
-    if not isinstance(Q, np.ndarray):
-        if Re(Q, D, rho, mu) > 2300:
-            return turbulent(D, epsilon, rho, mu)(Q)
-        else:
-            return laminar(D, rho, mu)(Q)
 
     return np.piecewise(Q, [Re(Q, D, rho, mu) > 2300, Re(Q, D, rho, mu) <= 2300],
                         [turbulent(D, epsilon, rho, mu), laminar(D, rho, mu)])
