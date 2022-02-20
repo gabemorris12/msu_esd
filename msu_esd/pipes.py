@@ -175,6 +175,15 @@ class Pipe:
         """
         return 16*abs(Q)*(self.f(Q)*self.L/self.D + self.K + self.C*self.f_T())/(np.pi**2*self.g*self.D**4)
 
+    def V(self, Q):
+        """
+        Returns the velocity of the fluid for a given flow rate
+
+        :param Q: The flow rate
+        :return: V
+        """
+        return Q/(np.pi/4*self.D**4)
+
     def __call__(self, *args):
         """
         This returns an expression that is equal to zero. Used for iterative solutions.
