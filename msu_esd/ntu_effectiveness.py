@@ -72,7 +72,7 @@ def shell_and_tube_n_shell_passes():
 
 def cross_flow_unmixed(x, C, find='NTU'):
     """
-    For a counter flow with both streams unmixed
+    For a cross flow with both streams unmixed
 
     :param x: NTU or effectiveness. If find="NTU", then x is expected to be the effectiveness. x can be an array.
     :param C: C_min/C_max
