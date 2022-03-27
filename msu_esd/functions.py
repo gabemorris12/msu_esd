@@ -84,16 +84,16 @@ def hardy_cross(pipes, Q, N, h=None, dh=None, tol=0.0001):
     return Q
 
 
-def log_mean_temp_difference(T_h_in, T_h_out, T_c_in, T_c_out):
+def log_mean_temp_difference(Th_in, Th_out, Tc_in, Tc_out):
     """
     Finds the log mean temperature difference
 
-    :param T_h_in: Temp of hot fluid as it goes in
-    :param T_h_out: Temp of hot fluid as it goes out
-    :param T_c_in: Temp of cold fluid as it goes in
-    :param T_c_out: Temp of cold fluid as it goes out
+    :param Th_in: Temp of hot fluid as it goes in
+    :param Th_out: Temp of hot fluid as it goes out
+    :param Tc_in: Temp of cold fluid as it goes in
+    :param Tc_out: Temp of cold fluid as it goes out
     :return: The log mean temperature difference
     """
-    T2 = T_h_out - T_c_in
-    T1 = T_h_in - T_c_out
+    T2 = Th_out - Tc_in
+    T1 = Th_in - Tc_out
     return (T2 - T1)/np.log(T2/T1)
