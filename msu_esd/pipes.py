@@ -182,7 +182,7 @@ class Pipe:
         :param Q: The flow rate
         :return: V
         """
-        return Q/(np.pi/4*self.D**4)
+        return Q/(np.pi/4*self.D**2)
 
     def __call__(self, *args):
         """
