@@ -1,6 +1,3 @@
-import sys
-sys.path.append(r'C:\Users\gmbra\Downloads\Senior First Semester\ESD\Project 3')
-
 from msu_esd import Pipe
 import numpy as np
 import csv
