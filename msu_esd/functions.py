@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.optimize import fsolve
 
 
 def f_T(D, epsilon):
@@ -97,3 +98,20 @@ def log_mean_temp_difference(Th_in, Th_out, Tc_in, Tc_out):
     T2 = Th_out - Tc_in
     T1 = Th_in - Tc_out
     return (T2 - T1)/np.log(T2/T1)
+
+
+def SSU(nu):
+    """
+    Returns the Saybolt Seconds Universal value of viscosity.
+
+    :param nu: The kinematic viscosity in ft^2/s
+    :return: SSU value
+    """
+    guess = 100
+    stoke = 1e-4  # m^2/s
+    nu = nu/3.28084**2  # converts to m^2/s
+
+    if nu < 0.2065*stoke:
+        return fsolve(lambda ssu: nu - 0.00226*stoke*ssu + 1.95*stoke/ssu, np.array([guess, ]))[0]
+    else:
+        return fsolve(lambda ssu: nu - 0.0022*stoke*ssu + 1.35*stoke/ssu, np.array([guess, ]))[0]
