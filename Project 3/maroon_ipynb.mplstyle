@@ -1,0 +1,17 @@
+# Jupyter Notebook Default Style
+axes.prop_cycle: cycler('color', ['maroon', 'black', 'deepskyblue', 'darkgrey', '000080', '008000', '008080', '808000', '804000'])
+axes.grid: True
+axes.labelsize: 18
+axes.titlesize: 20
+
+figure.dpi: 240
+figure.autolayout: True
+figure.figsize: 10, 6
+
+font.size: 12
+font.family: "Times"
+
+lines.linewidth: 2.0
+lines.markersize: 8
+
+text.usetex: True
